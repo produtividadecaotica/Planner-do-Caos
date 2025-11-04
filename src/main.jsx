@@ -9,8 +9,7 @@ import App from "./App.jsx";
 // garante que o splash suma quando o app montar
 try { window.__pc_ready__ && window.__pc_ready__(); } catch {}
 
-const root = document.getElementById("root");
-createRoot(root).render(
+createRoot(document.getElementById("root")).render(
   <HashRouter>
     <App />
   </HashRouter>
