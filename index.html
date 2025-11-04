@@ -1,162 +1,96 @@
 <!doctype html>
 <html lang="pt-BR" data-theme="system">
   <head>
+    <!-- (Opcional, só em dev) React DevTools -->
     <script src="http://localhost:8097"></script>
+
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, viewport-fit=cover"
-    />
-    <meta
-      name="description"
-      content="Planner do Caos — app de planejamento mágico + dark academia."
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="Planner do Caos — app de planejamento mágico + dark academia." />
     <meta name="color-scheme" content="light dark" />
-    <meta
-      name="theme-color"
-      media="(prefers-color-scheme: light)"
-      content="#faf9fb"
-    />
-    <meta
-      name="theme-color"
-      media="(prefers-color-scheme: dark)"
-      content="#0b0a10"
-    />
+
+    <!-- theme-color dinâmico -->
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf9fb" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0a10" />
 
     <title>Planner do Caos</title>
 
+    <!-- Fonte -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
+    <!-- Estilos base + tokens -->
     <style>
-      :root {
-        --pc-bg: #faf9fb;
-        --pc-surface: #ffffff;
-        --pc-text: #0e0c14;
-        --pc-muted: #6b6b76;
-        --pc-bg-dark: #0b0a10;
-        --pc-surface-dark: #12101a;
-        --pc-text-dark: #ededf6;
-        --pc-muted-dark: #9aa0a6;
-        --pc-primary: #6c45d3;
-        --pc-primary-600: #5a37b8;
-        --pc-gold: #d4af37;
-        --pc-border: #e7e4ec;
-        --pc-border-dark: #272433;
-        --pc-overlay: rgba(10, 8, 16, 1);
-        --pc-shadow: 0 10px 30px rgba(10, 8, 16, 0.12);
-        --pc-shadow-strong: 0 20px 60px rgba(10, 8, 16, 0.22);
-        --pc-radius: 16px;
-        --pc-radius-sm: 10px;
-        --pc-radius-lg: 22px;
-        --pc-z-toast: 1000;
-        --pc-z-modal: 1100;
-        --pc-z-overlay: 1090;
-        --pc-z-popover: 1050;
+      :root{
+        --pc-bg:#faf9fb; --pc-surface:#fff; --pc-text:#0e0c14; --pc-muted:#6b6b76;
+        --pc-bg-dark:#0b0a10; --pc-surface-dark:#12101a; --pc-text-dark:#ededf6; --pc-muted-dark:#9aa0a6;
+        --pc-primary:#6c45d3; --pc-primary-600:#5a37b8; --pc-gold:#d4af37;
+        --pc-border:#e7e4ec; --pc-border-dark:#272433;
+        --pc-shadow:0 10px 30px rgba(10,8,16,.12);
+        --pc-radius:16px;
+        --pc-z-toast:1000; --pc-z-modal:1100; --pc-z-overlay:1090; --pc-z-popover:1050;
       }
 
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI,
-          Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-        background: var(--pc-bg);
-        color: var(--pc-text);
+      html,body{
+        margin:0; padding:0; height:100%;
+        font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,"Apple Color Emoji","Segoe UI Emoji";
+        background:var(--pc-bg); color:var(--pc-text);
       }
 
-      .pc-splash {
-        display: grid;
-        place-items: center;
-        height: 100dvh;
-        background: radial-gradient(
-            60% 60% at 50% 0%,
-            rgba(108, 69, 211, 0.08),
-            transparent 60%
-          ),
-          radial-gradient(
-            40% 40% at 80% 20%,
-            rgba(212, 175, 55, 0.08),
-            transparent 60%
-          ),
+      /* Splash */
+      .pc-splash{
+        display:grid; place-items:center; height:100dvh;
+        background:
+          radial-gradient(60% 60% at 50% 0%, rgba(108,69,211,.08), transparent 60%),
+          radial-gradient(40% 40% at 80% 20%, rgba(212,175,55,.08), transparent 60%),
           var(--pc-bg);
       }
+      .pc-card{
+        background:var(--pc-surface); border:1px solid var(--pc-border); border-radius:var(--pc-radius);
+        padding:24px 20px; box-shadow:var(--pc-shadow); display:grid; gap:8px; min-width:min(440px,92vw); justify-items:center;
+      }
+      .pc-logo-mark{
+        width:28px; height:28px; border-radius:8px;
+        background:conic-gradient(from 220deg, var(--pc-primary), var(--pc-gold), var(--pc-primary));
+        box-shadow:0 2px 10px rgba(108,69,211,.35);
+      }
+      .pc-spinner{
+        width:18px; height:18px; border-radius:50%;
+        border:2px solid rgba(108,69,211,.25); border-top-color:var(--pc-primary);
+        animation:pc-spin .9s linear infinite; margin-top:4px;
+      }
+      @keyframes pc-spin { to { transform: rotate(360deg); } }
 
-      .pc-card {
-        background: var(--pc-surface);
-        border: 1px solid var(--pc-border);
-        border-radius: var(--pc-radius);
-        padding: 24px 20px;
-        box-shadow: var(--pc-shadow);
-        display: grid;
-        gap: 8px;
-        min-width: min(440px, 92vw);
-        justify-items: center;
+      /* Portais NÃO podem bloquear cliques. Mantém como contêineres neutros. */
+      #pc-overlay-root, #pc-modal-root, #pc-toast-root, #pc-popover-root{
+        pointer-events:none; /* não intercepta cliques */
       }
 
-      .pc-logo-mark {
-        width: 28px;
-        height: 28px;
-        border-radius: 8px;
-        background: conic-gradient(
-          from 220deg,
-          var(--pc-primary),
-          var(--pc-gold),
-          var(--pc-primary)
-        );
-        box-shadow: 0 2px 10px rgba(108, 69, 211, 0.35);
-      }
-
-      .pc-spinner {
-        width: 18px;
-        height: 18px;
-        border-radius: 50%;
-        border: 2px solid rgba(108, 69, 211, 0.25);
-        border-top-color: var(--pc-primary);
-        animation: pc-spin 0.9s linear infinite;
-        margin-top: 4px;
-      }
-
-      @keyframes pc-spin {
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
-      #pc-overlay-root,
-      #pc-modal-root,
-      #pc-toast-root,
-      #pc-popover-root {
-        position: fixed;
-        inset: 0;
+      /* Dark fallback */
+      @media (prefers-color-scheme: dark){
+        html:not(.force-light) body{ background:var(--pc-bg-dark); color:var(--pc-text-dark); }
+        html:not(.force-light) .pc-card{ background:var(--pc-surface-dark); border-color:var(--pc-border-dark); }
       }
     </style>
 
+    <!-- Script de tema -->
     <script>
       (function () {
         try {
-          const saved = localStorage.getItem("pc-theme");
+          const saved = localStorage.getItem("pc-theme"); // "light" | "dark" | "system"
           const root = document.documentElement;
           const apply = (mode) => {
-            root.classList.remove("force-light", "force-dark");
+            root.classList.remove("force-light","force-dark");
             if (mode === "light") root.classList.add("force-light");
             if (mode === "dark") root.classList.add("force-dark");
             root.setAttribute("data-theme", mode || "system");
           };
-          if (saved) apply(saved);
-          else apply("system");
-          matchMedia("(prefers-color-scheme: dark)").addEventListener(
-            "change",
-            () => {
-              const cur = localStorage.getItem("pc-theme") || "system";
-              apply(cur);
-            }
-          );
+          apply(saved || "system");
+          matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+            const cur = localStorage.getItem("pc-theme") || "system";
+            apply(cur);
+          });
         } catch (e) {}
       })();
     </script>
@@ -186,17 +120,17 @@
     <div id="pc-toast-root"></div>
     <div id="pc-popover-root"></div>
 
+    <!-- Entrada Vite/React -->
     <script type="module" src="/src/main.jsx"></script>
 
-    <!-- Remove splash ao carregar o app -->
+    <!-- API simples: o app chama isto quando estiver pronto -->
     <script>
-      window.__pc_ready__ = function () {
+      window.__pc_ready__ = function(){
         const s = document.getElementById("pc-splash");
         if (s && s.parentNode) s.parentNode.removeChild(s);
       };
-      setTimeout(() => {
-        if (window.__pc_ready__) window.__pc_ready__();
-      }, 6000);
+      /* Fallback: some com splash em 6s se algo impedir a chamada acima */
+      setTimeout(() => { if (window.__pc_ready__) window.__pc_ready__(); }, 6000);
     </script>
   </body>
 </html>
