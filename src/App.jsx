@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import Sidebar from "./components/Sidebar.jsx";
 import Header from "./components/Header.jsx";
@@ -8,7 +8,7 @@ import Header from "./components/Header.jsx";
 import WelcomeMessage from "./components/WelcomeMessage.jsx";
 import CallToAction from "./components/CallToAction.jsx";
 
-// Páginas (ajuste os caminhos se preciso)
+// Páginas
 import PlanningPage from "./pages/PlanningPage.jsx";
 import ObjectivesPage from "./pages/ObjectivesPage.jsx";
 import ProjectsPage from "./pages/ProjectsPage.jsx";
@@ -42,6 +42,11 @@ function DashboardPage() {
 export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
+  // Debug opcional — ajuda a ver a rota lida pelo Router:
+  const { pathname } = useLocation();
+  // Remova a linha abaixo depois dos testes, se quiser:
+  // console.log("ROUTE_DEBUG:", pathname);
+
   return (
     <div className="min-h-screen bg-[var(--pc-bg)] text-[var(--pc-text)]">
       <div className="flex">
@@ -51,8 +56,11 @@ export default function App() {
           <Header onToggleSidebar={() => setSidebarOpen(v => !v)} />
 
           <main className="p-4 md:p-6 grid gap-6">
+            {/* Debug visual temporário; remova se não quiser */}
+            <div className="text-xs opacity-50">ROUTE: {pathname}</div>
+
             <Routes>
-              {/* Dashboard */}
+              {/* Dashboard (/) */}
               <Route index element={<DashboardPage />} />
 
               {/* Páginas */}
@@ -65,7 +73,7 @@ export default function App() {
               <Route path="/library" element={<LibraryPage />} />
               <Route path="/tools" element={<InboxPage />} />
 
-              {/* Fallback */}
+              {/* Fallback → volta pro dashboard */}
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </main>
