@@ -1,3 +1,10 @@
+- import Tabs from "../ui/tabs.jsx";
+- import Dialog from "../ui/dialog.jsx";
+- import Select from "../ui/select.jsx";
++ import Tabs from "../components/ui/tabs.jsx";
++ import Dialog from "../components/ui/dialog.jsx";
++ import Select from "../components/ui/select.jsx";
+
 import { useEffect, useMemo, useState } from "react";
 import { DateTime, Interval } from "luxon";
 import { FINANCE_CATEGORIES, formatBRL, storage, uid } from "../lib/utils.js";
