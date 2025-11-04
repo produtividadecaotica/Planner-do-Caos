@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
+
 import Sidebar from "./components/Sidebar.jsx";
 import Header from "./components/Header.jsx";
 import WelcomeMessage from "./components/WelcomeMessage.jsx";
 import CallToAction from "./components/CallToAction.jsx";
 
-// Páginas
+// páginas
 import DashboardPage from "./pages/DashboardPage.jsx";
 import PlanningPage from "./pages/PlanningPage.jsx";
 import ObjectivesPage from "./pages/ObjectivesPage.jsx";
@@ -28,7 +29,6 @@ export default function App() {
           <Header onToggleSidebar={() => setSidebarOpen(v => !v)} />
 
           <main className="p-4 md:p-6 grid gap-6">
-            {/* Banner de boas-vindas só no dashboard */}
             <Routes>
               <Route
                 path="/"
@@ -37,15 +37,17 @@ export default function App() {
                     <WelcomeMessage />
                     <section className="grid gap-4 md:grid-cols-2">
                       <div className="rounded-2xl border border-[var(--pc-border)] bg-[var(--pc-surface)] p-6 shadow-pc">
-                        <h2 className="text-lg font-semibold tracking-tight mb-2">Hoje</h2>
+                        <h2 className="text-lg font-semibold mb-2">Hoje</h2>
                         <p className="text-sm text-[var(--pc-muted)]">
-                          Tarefas e eventos de hoje aparecem aqui. (Depois vamos ligar ao Calendário/Inbox.)
+                          Tarefas e eventos de hoje aparecem aqui.
                         </p>
                       </div>
                       <div className="rounded-2xl border border-[var(--pc-border)] bg-[var(--pc-surface)] p-6 shadow-pc">
-                        <h2 className="text-lg font-semibold tracking-tight mb-2">Contas que vencem hoje</h2>
+                        <h2 className="text-lg font-semibold mb-2">
+                          Contas que vencem hoje
+                        </h2>
                         <p className="text-sm text-[var(--pc-muted)]">
-                          Financeiro resumido do dia. (Ligaremos às tabelas de Finanças.)
+                          Financeiro resumido do dia.
                         </p>
                       </div>
                     </section>
@@ -61,9 +63,8 @@ export default function App() {
               <Route path="/study" element={<StudyRoomPage />} />
               <Route path="/finance" element={<FinancePage />} />
               <Route path="/library" element={<LibraryPage />} />
-              <Route path="/inbox" element={<InboxPage />} />
+              <Route path="/tools" element={<InboxPage />} />
 
-              {/* fallback */}
               <Route path="*" element={<DashboardPage />} />
             </Routes>
           </main>
