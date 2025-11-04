@@ -1,16 +1,17 @@
 import { NavLink } from "react-router-dom";
 
 export default function Sidebar({ open, onToggle }) {
-  const link = (to, label, short) => (
+  const Item = (to, full, short) => (
     <NavLink
       to={to}
+      end={to === "/"}
       className={({ isActive }) =>
         `block rounded-md px-3 py-2 transition ${
           isActive ? "bg-black/5 dark:bg-white/5 font-medium" : ""
         } hover:bg-black/5 dark:hover:bg-white/5`
       }
     >
-      {open ? label : short}
+      {open ? full : short}
     </NavLink>
   );
 
@@ -28,24 +29,24 @@ export default function Sidebar({ open, onToggle }) {
               "conic-gradient(from 220deg, var(--pc-primary), var(--pc-gold), var(--pc-primary))",
           }}
         />
-        {open && <span className="font-semibold tracking-tight">Planner do Caos</span>}
+        {open && <span className="font-semibold">Planner do Caos</span>}
       </div>
 
       <nav className="mt-2 flex-1 px-2 space-y-1 text-sm">
-        {link("/", "Dashboard", "D")}
-        {link("/planning", "Calendário", "C")}
-        {link("/objectives", "Mapa de Objetivos", "O")}
-        {link("/projects", "Projetos", "P")}
-        {link("/mood", "Manejo Emocional", "M")}
-        {link("/study", "Sala de Estudos", "S")}
-        {link("/finance", "Finanças", "F")}
-        {link("/library", "Biblioteca", "B")}
-        {link("/tools", "Ferramentas", "T")}
+        {Item("/", "Dashboard", "D")}
+        {Item("/planning", "Calendário", "C")}
+        {Item("/objectives", "Mapa de Objetivos", "O")}
+        {Item("/projects", "Projetos", "P")}
+        {Item("/mood", "Manejo Emocional", "M")}
+        {Item("/study", "Sala de Estudos", "S")}
+        {Item("/finance", "Finanças", "F")}
+        {Item("/library", "Biblioteca", "B")}
+        {Item("/tools", "Ferramentas", "T")}
       </nav>
 
       <button
         onClick={onToggle}
-        className="m-3 rounded-lg border border-[var(--pc-border)] px-3 py-2 text-xs hover:bg-black/5 dark:hover:bg:white/5"
+        className="m-3 rounded-lg border border-[var(--pc-border)] px-3 py-2 text-xs hover:bg-black/5 dark:hover:bg-white/5"
       >
         {open ? "Recolher" : "Expandir"}
       </button>
