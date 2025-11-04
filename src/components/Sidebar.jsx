@@ -28,7 +28,7 @@ export default function Sidebar({ open, onToggle }) {
               "conic-gradient(from 220deg, var(--pc-primary), var(--pc-gold), var(--pc-primary))",
           }}
         />
-        {open && <span className="font-semibold">Planner do Caos</span>}
+        {open && <span className="font-semibold tracking-tight">Planner do Caos</span>}
       </div>
 
       <nav className="mt-2 flex-1 px-2 space-y-1 text-sm">
@@ -52,4 +52,3 @@ export default function Sidebar({ open, onToggle }) {
     </aside>
   );
 }
-
