@@ -30,6 +30,7 @@ export default function App() {
 
           <main className="p-4 md:p-6 grid gap-6">
             <Routes>
+              {/* Dashboard */}
               <Route
                 path="/"
                 element={
@@ -38,17 +39,11 @@ export default function App() {
                     <section className="grid gap-4 md:grid-cols-2">
                       <div className="rounded-2xl border border-[var(--pc-border)] bg-[var(--pc-surface)] p-6 shadow-pc">
                         <h2 className="text-lg font-semibold mb-2">Hoje</h2>
-                        <p className="text-sm text-[var(--pc-muted)]">
-                          Tarefas e eventos de hoje aparecem aqui.
-                        </p>
+                        <p className="text-sm text-[var(--pc-muted)]">Tarefas e eventos de hoje aparecem aqui.</p>
                       </div>
                       <div className="rounded-2xl border border-[var(--pc-border)] bg-[var(--pc-surface)] p-6 shadow-pc">
-                        <h2 className="text-lg font-semibold mb-2">
-                          Contas que vencem hoje
-                        </h2>
-                        <p className="text-sm text-[var(--pc-muted)]">
-                          Financeiro resumido do dia.
-                        </p>
+                        <h2 className="text-lg font-semibold mb-2">Contas que vencem hoje</h2>
+                        <p className="text-sm text-[var(--pc-muted)]">Financeiro resumido do dia.</p>
                       </div>
                     </section>
                     <CallToAction />
@@ -56,6 +51,7 @@ export default function App() {
                 }
               />
 
+              {/* Demais páginas */}
               <Route path="/planning" element={<PlanningPage />} />
               <Route path="/objectives" element={<ObjectivesPage />} />
               <Route path="/projects" element={<ProjectsPage />} />
@@ -65,6 +61,7 @@ export default function App() {
               <Route path="/library" element={<LibraryPage />} />
               <Route path="/tools" element={<InboxPage />} />
 
+              {/* Fallback */}
               <Route path="*" element={<DashboardPage />} />
             </Routes>
           </main>
