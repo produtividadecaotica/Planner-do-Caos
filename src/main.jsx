@@ -1,12 +1,12 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import Toaster from "./ui/toaster.jsx";
 
 import "./index.css";
 import App from "./App.jsx";
 
-// Providers
+// (Se você usa providers, adicione aqui)
+import Toaster from "./ui/toaster.jsx";
 import { ThemeProvider } from "./contexts/ThemeContext.jsx";
 import { CalendarProvider } from "./contexts/CalendarContext.jsx";
 import { ObjectiveProvider } from "./contexts/ObjectiveContext.jsx";
