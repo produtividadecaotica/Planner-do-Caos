@@ -6,6 +6,29 @@
 + import Select from "../components/ui/select.jsx";
 
 import { useEffect, useMemo, useState } from "react";
+import { DateTime } from "luxon";
+import { FINANCE_CATEGORIES, formatBRL, storage, uid } from "../lib/utils.js";
+import { expandOccurrences, humanizeRRule } from "../lib/rrule.js";
+
+import Tabs from "../components/ui/tabs.jsx";
+import Dialog from "../components/ui/dialog.jsx";
+import Select from "../components/ui/select.jsx";
+
+import {
+  ChevronLeft,
+  ChevronRight,
+  CreditCard,
+  Plus,
+  Trash2,
+  Wallet,
+  Calendar as Cal,
+  PiggyBank,
+  Filter,
+} from "lucide-react";
+
+// (restante do seu código da FinancePage permanece exatamente igual)
+
+import { useEffect, useMemo, useState } from "react";
 import { DateTime, Interval } from "luxon";
 import { FINANCE_CATEGORIES, formatBRL, storage, uid } from "../lib/utils.js";
 import { buildRRuleString, expandOccurrences, humanizeRRule } from "../lib/rrule.js";
