@@ -1,21 +1,13 @@
-import { createPortal } from "react-dom";
-import { useToastStore } from "./use-toast.js";
-import Toast from "./toast.jsx";
+import { Toaster } from 'react-hot-toast'
 
-/**
- * Toaster global (monta via portal).
- */
-export default function Toaster() {
-  const { toasts } = useToastStore();
-
-  if (!toasts.length) return null;
-
-  return createPortal(
-    <div className="fixed top-4 right-4 z-[var(--pc-z-toast)]">
-      {toasts.map((t) => (
-        <Toast key={t.id} {...t} />
-      ))}
-    </div>,
-    document.getElementById("pc-toast-root")
-  );
+export default function PCToaster() {
+  return (
+    <Toaster
+      position="bottom-center"
+      toastOptions={{
+        duration: 4000,
+        className: 'pc-toast',
+      }}
+    />
+  )
 }
