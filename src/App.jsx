@@ -1,52 +1,71 @@
-
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar.jsx";
 import Header from "./components/Header.jsx";
 import WelcomeMessage from "./components/WelcomeMessage.jsx";
 import CallToAction from "./components/CallToAction.jsx";
 
-/**
- * Shell do app (dashboard app + dark academia):
- * - Sidebar à esquerda (colapsável)
- * - Header/topbar
- * - Área de conteúdo com placeholders elegantes (até ligarmos as pages)
- */
+// Páginas
+import DashboardPage from "./pages/DashboardPage.jsx";
+import PlanningPage from "./pages/PlanningPage.jsx";
+import ObjectivesPage from "./pages/ObjectivesPage.jsx";
+import ProjectsPage from "./pages/ProjectsPage.jsx";
+import EmotionalPage from "./pages/EmotionalPage.jsx";
+import StudyRoomPage from "./pages/StudyRoomPage.jsx";
+import FinancePage from "./pages/FinancePage.jsx";
+import LibraryPage from "./pages/LibraryPage.jsx";
+import InboxPage from "./pages/InboxPage.jsx";
+
 export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
-
-  useEffect(() => {
-    // Remove o splash assim que o React subir
-    if (typeof window !== "undefined" && window.__pc_ready__) {
-      window.__pc_ready__();
-    }
-  }, []);
 
   return (
     <div className="min-h-screen bg-[var(--pc-bg)] text-[var(--pc-text)]">
       <div className="flex">
-        <Sidebar open={sidebarOpen} onToggle={() => setSidebarOpen((v) => !v)} />
+        <Sidebar open={sidebarOpen} onToggle={() => setSidebarOpen(v => !v)} />
 
         <div className="flex-1 min-w-0">
-          <Header onToggleSidebar={() => setSidebarOpen((v) => !v)} />
+          <Header onToggleSidebar={() => setSidebarOpen(v => !v)} />
 
           <main className="p-4 md:p-6 grid gap-6">
-            <WelcomeMessage />
-            <section className="grid gap-4 md:grid-cols-2">
-              <div className="rounded-2xl border border-[var(--pc-border)] bg-[var(--pc-surface)] p-6 shadow-pc">
-                <h2 className="text-lg font-semibold tracking-tight mb-2">Hoje</h2>
-                <p className="text-sm text-[var(--pc-muted)]">
-                  Tarefas e eventos de hoje aparecem aqui. (Depois vamos ligar ao Calendário/Inbox.)
-                </p>
-              </div>
-              <div className="rounded-2xl border border-[var(--pc-border)] bg-[var(--pc-surface)] p-6 shadow-pc">
-                <h2 className="text-lg font-semibold tracking-tight mb-2">Contas que vencem hoje</h2>
-                <p className="text-sm text-[var(--pc-muted)]">
-                  Financeiro resumido do dia. (Ligaremos às tabelas de Finanças.)
-                </p>
-              </div>
-            </section>
+            {/* Banner de boas-vindas só no dashboard */}
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <>
+                    <WelcomeMessage />
+                    <section className="grid gap-4 md:grid-cols-2">
+                      <div className="rounded-2xl border border-[var(--pc-border)] bg-[var(--pc-surface)] p-6 shadow-pc">
+                        <h2 className="text-lg font-semibold tracking-tight mb-2">Hoje</h2>
+                        <p className="text-sm text-[var(--pc-muted)]">
+                          Tarefas e eventos de hoje aparecem aqui. (Depois vamos ligar ao Calendário/Inbox.)
+                        </p>
+                      </div>
+                      <div className="rounded-2xl border border-[var(--pc-border)] bg-[var(--pc-surface)] p-6 shadow-pc">
+                        <h2 className="text-lg font-semibold tracking-tight mb-2">Contas que vencem hoje</h2>
+                        <p className="text-sm text-[var(--pc-muted)]">
+                          Financeiro resumido do dia. (Ligaremos às tabelas de Finanças.)
+                        </p>
+                      </div>
+                    </section>
+                    <CallToAction />
+                  </>
+                }
+              />
 
-            <CallToAction />
+              <Route path="/planning" element={<PlanningPage />} />
+              <Route path="/objectives" element={<ObjectivesPage />} />
+              <Route path="/projects" element={<ProjectsPage />} />
+              <Route path="/mood" element={<EmotionalPage />} />
+              <Route path="/study" element={<StudyRoomPage />} />
+              <Route path="/finance" element={<FinancePage />} />
+              <Route path="/library" element={<LibraryPage />} />
+              <Route path="/inbox" element={<InboxPage />} />
+
+              {/* fallback */}
+              <Route path="*" element={<DashboardPage />} />
+            </Routes>
           </main>
         </div>
       </div>
